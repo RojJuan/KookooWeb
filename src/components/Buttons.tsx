@@ -1,11 +1,32 @@
 import React, { useState } from "react";
+import Modal from "react-modal";
 import "./Buttons.css";
+
+Modal.setAppElement("#root");
 
 export default function Buttons() {
   const [visibleText, setVisibleText] = useState<string | null>(null);
+  const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
+  const [voteSuccess, setVoteSuccess] = useState<boolean>(false);
 
   const toggleVisibility = (buttonText: string) => {
     setVisibleText(buttonText);
+    setModalIsOpen(false);
+  };
+
+  const openModal = () => {
+    if (visibleText) {
+      setModalIsOpen(true);
+    }
+  };
+
+  const closeModal = () => {
+    setModalIsOpen(false);
+    setVoteSuccess(false);
+  };
+
+  const handleVoteClick = () => {
+    setVoteSuccess(true);
   };
 
   return (
@@ -47,7 +68,7 @@ export default function Buttons() {
           </button>
           <button onClick={() => toggleVisibility("Game4")}>
             <img
-              className="max-h-12 w-full object-contain text-center"
+              className="max-h-12 w-full object-contain"
               src="https://www.seaisland.com/content/uploads/2022/01/placeholder-image.png"
               alt="Game4"
               width={158}
@@ -74,8 +95,43 @@ export default function Buttons() {
             {visibleText === "Game4" && (
               <p className="text-center fade-in">Steal cows.</p>
             )}
+            <div className="flex justify-center mt-4">
+              <button
+                className="text-lg font-semibold text-white bg-black px-4 py-2 rounded-md"
+                onClick={openModal}
+              >
+                Vote for {visibleText}!
+              </button>
+            </div>
           </>
         )}
+        <Modal
+          isOpen={modalIsOpen}
+          onRequestClose={closeModal}
+          contentLabel="Vote Modal"
+        >
+          {!voteSuccess ? (
+            <>
+              <h2>Voting Popup</h2>
+              <p>Are you sure you want to vote for {visibleText}?</p>
+              <button className="font-bold" onClick={closeModal}>
+                Cancel
+              </button>
+              <p> </p>
+              <button className="font-bold" onClick={handleVoteClick}>
+                Confirm Vote
+              </button>
+            </>
+          ) : (
+            <div className="text-center">
+              <span className="text-black text-5xl mb-4 inline-block">
+                &#10003;
+              </span>{" "}
+              <h2>Vote Successful!</h2>
+              <button onClick={closeModal}>Close</button>
+            </div>
+          )}
+        </Modal>
       </div>
     </div>
   );
