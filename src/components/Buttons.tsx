@@ -1,3 +1,4 @@
+
 import React, { useState } from "react";
 import Modal from "react-modal";
 import "./Buttons.css";
@@ -38,8 +39,8 @@ export default function Buttons() {
         <div className="flex justify-center mt-10">
           <button className="mr-4" onClick={() => toggleVisibility("B.B.B.")}>
             <img
-              className="max-h-12 w-full object-contain"
-              src="https://www.seaisland.com/content/uploads/2022/01/placeholder-image.png"
+              className="max-h-12 w-full object-contain border-2 border-black rounded-lg"
+              src="public/BBB.png"
               alt="B.B.B."
               width={158}
               height={48}
@@ -57,20 +58,20 @@ export default function Buttons() {
               height={48}
             />
           </button>
-          <button className="mr-4" onClick={() => toggleVisibility("Game3")}>
+          <button className="mr-4" onClick={() => toggleVisibility("Undead pursuit")}>
             <img
               className="max-h-12 w-full object-contain"
               src="https://www.seaisland.com/content/uploads/2022/01/placeholder-image.png"
-              alt="Game3"
+              alt="Undead pursuit"
               width={158}
               height={48}
             />
           </button>
-          <button onClick={() => toggleVisibility("Game4")}>
+          <button onClick={() => toggleVisibility("Cow heist")}>
             <img
-              className="max-h-12 w-full object-contain"
-              src="https://www.seaisland.com/content/uploads/2022/01/placeholder-image.png"
-              alt="Game4"
+              className="max-h-12 w-full object-contain border-2 border-black rounded-lg"
+              src="public/cow_heist.png"
+              alt="Cow heist"
               width={158}
               height={48}
             />
@@ -89,10 +90,10 @@ export default function Buttons() {
             {visibleText === "Brickception" && (
               <p className="text-center fade-in">Spinny brick game</p>
             )}
-            {visibleText === "Game3" && (
+            {visibleText === "Undead pursuit" && (
               <p className="text-center fade-in">Zombie.</p>
             )}
-            {visibleText === "Game4" && (
+            {visibleText === "Cow heist" && (
               <p className="text-center fade-in">Steal cows.</p>
             )}
             <div className="flex justify-center mt-4">
