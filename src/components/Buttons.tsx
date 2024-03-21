@@ -1,7 +1,10 @@
 import React, { useState } from "react";
 import Modal from "react-modal";
-import "./Buttons.css";
+import "./Buttons.css"; // Your custom CSS file
 import cowHeistGIF from "./cowheistGIF.gif"; // Import the cow heist GIF
+import breadImage from "./bread.png"; // Import the transparent bread image
+import cowHeistImage from "./cow_heist.png"; // Import the transparent cow heist image
+import { Link } from "react-router-dom";
 
 Modal.setAppElement("#root");
 
@@ -36,9 +39,21 @@ export default function Buttons() {
     setVoteSuccess(true);
   };
 
+  const getButtonGradient = () => {
+    // Define gradient classes for each game
+    const gameGradients: { [key: string]: string } = {
+      "B.B.B.": "bg-gradient-to-r from-cyan-500 to-green-500",
+      "Brickception": "bg-gradient-to-r from-pink-500 to-purple-700",
+      "Undead pursuit": "bg-gradient-to-r from-slate-700 to-green-800",
+      "Cow heist": "bg-gradient-to-r from-red-800 to-orange-600"
+    };
+    // Return the gradient class based on the selected game
+    return gameGradients[visibleText || ""] || "";
+  };
+
   return (
     <div>
-      <div className="bg-white py-24 sm:py-32">
+      <div className="bg-transparent py-24 sm:py-32">
         <div className="mx-auto max-w-7xl px-6 lg:px-8">
           <h2 className="text-center text-4xl font-semibold leading-8 text-gray-900 underline">
             Vote for the best game!
@@ -47,7 +62,7 @@ export default function Buttons() {
             <button className="mr-4 p-2" onClick={() => toggleVisibility("B.B.B.")}>
               <img
                 className="max-h-24 w-full object-contain border-2 border-black rounded-lg"
-                src="public/bread.png"
+                src={breadImage}
                 alt="B.B.B."
                 width={158}
                 height={48}
@@ -77,7 +92,7 @@ export default function Buttons() {
             <button onClick={() => toggleVisibility("Cow heist")}>
               <img
                 className="max-h-24 w-full object-contain border-2 border-black rounded-lg"
-                src="public/cow_heist.png"
+                src={cowHeistImage}
                 alt="Cow heist"
                 width={158}
                 height={48}
@@ -90,22 +105,22 @@ export default function Buttons() {
                 {visibleText}
               </p>
               {visibleText === "B.B.B." && (
-                <p className="text-center fade-in">
+                <p className="text-center fade-in text-2xl">
                   A game about boats, battles and bread.
                 </p>
               )}
               {visibleText === "Brickception" && (
-                <p className="text-center fade-in">Spinny brick game</p>
+                <p className="text-center fade-in text-2xl">Spinny brick game</p>
               )}
               {visibleText === "Undead pursuit" && (
-                <p className="text-center fade-in">Zombie.</p>
+                <p className="text-center fade-in text-2xl">Zombie.</p>
               )}
               {visibleText === "Cow heist" && (
-                <p className="text-center fade-in">Steal cows.</p>
+                <p className="text-center fade-in text-2xl">Steal cows.</p>
               )}
               <div className="flex justify-center mt-4">
                 <button
-                  className="text-lg font-semibold text-white bg-black px-4 py-2 rounded-md"
+                  className={`text-lg font-semibold text-white px-4 py-2 rounded-md ${getButtonGradient()}`}
                   onClick={openModal}
                 >
                   Vote for {visibleText}!
@@ -158,6 +173,7 @@ export default function Buttons() {
           />
         </div>
       )}
+      <Link to="/about" className="block text-center mt-8 text-blue-500 underline">About Us</Link>
     </div>
   );
 }
