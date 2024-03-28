@@ -3,8 +3,8 @@ import Modal from "react-modal";
 import "./Buttons.css"; // Your custom CSS file
 import cowHeistGIF from "./cowheistGIF.gif"; // Import the cow heist GIF
 import breadImage from "./bread.png"; // Import the transparent bread image
-import cowHeistImage from "./cow_heist.png"; // Import the transparent cow heist image
-import { Link } from "react-router-dom";
+import cowHeistImage from "./cow_heist.png";
+import limbaLogo from "./LIMBAKOOKOOLOGO.png"; // Import the transparent cow heist image
 
 Modal.setAppElement("#root");
 
@@ -13,6 +13,7 @@ export default function Buttons() {
   const [modalIsOpen, setModalIsOpen] = useState<boolean>(false);
   const [voteSuccess, setVoteSuccess] = useState<boolean>(false);
   const [showCowHeistGif, setShowCowHeistGif] = useState<boolean>(false);
+  const [selectedGame, setSelectedGame] = useState<string | null>(null);
 
   const toggleVisibility = (buttonText: string) => {
     setVisibleText(buttonText);
@@ -22,6 +23,7 @@ export default function Buttons() {
     } else {
       setShowCowHeistGif(false);
     }
+    setSelectedGame(buttonText); // Set the selected game
   };
 
   const openModal = () => {
@@ -48,7 +50,7 @@ export default function Buttons() {
       "Cow heist": "bg-gradient-to-r from-red-800 to-orange-600"
     };
     // Return the gradient class based on the selected game
-    return gameGradients[visibleText || ""] || "";
+    return gameGradients[selectedGame || ""] || "";
   };
 
   return (
@@ -101,7 +103,7 @@ export default function Buttons() {
           </div>
           {visibleText && (
             <>
-              <p className="text-center font-bold text-3xl fade-in">
+              <p className={`text-center font-bold text-3xl bg-gradient-to-r ${getButtonGradient()} text-transparent bg-clip-text`}>
                 {visibleText}
               </p>
               {visibleText === "B.B.B." && (
@@ -173,7 +175,15 @@ export default function Buttons() {
           />
         </div>
       )}
-      <Link to="/about" className="block text-center mt-8 text-blue-500 underline">About Us</Link>
+      <div className="flex justify-center">
+        <img src={limbaLogo} alt="bruhhhh" className="w-96 h-auto"></img>
+      </div>
+      <div className="text-center py-8">
+        <p className={`font-bold text-2xl bg-gradient-to-r ${getButtonGradient()} text-transparent bg-clip-text`}>What is Limbakookoo Game Studios?</p>
+        <p className="text-lg text-black mb-6">Limbakookoo Game Studios is an indie studio started by a few high school students.</p>
+        <p className={`font-bold text-2xl bg-gradient-to-r ${getButtonGradient()} text-transparent bg-clip-text`}>Why was it named Limbakookoo?</p>
+        <p className="text-lg text-black">We needed a codename for a GitHub project, and I asked the manager what it should be called. He said "limbakookoo", and so, the name stuck.</p>
+      </div>
     </div>
   );
 }
