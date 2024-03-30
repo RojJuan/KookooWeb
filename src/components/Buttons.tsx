@@ -45,9 +45,9 @@ export default function Buttons() {
     // Define gradient classes for each game
     const gameGradients: { [key: string]: string } = {
       "B.B.B.": "bg-gradient-to-r from-cyan-500 to-green-500",
-      "Brickception": "bg-gradient-to-r from-pink-500 to-purple-700",
+      Brickception: "bg-gradient-to-r from-pink-500 to-purple-700",
       "Undead pursuit": "bg-gradient-to-r from-slate-700 to-green-800",
-      "Cow heist": "bg-gradient-to-r from-red-800 to-orange-600"
+      "Cow heist": "bg-gradient-to-r from-red-800 to-orange-600",
     };
     // Return the gradient class based on the selected game
     return gameGradients[selectedGame || ""] || "";
@@ -61,7 +61,10 @@ export default function Buttons() {
             Vote for the best game!
           </h2>
           <div className="flex justify-center mt-10">
-            <button className="mr-4 p-2" onClick={() => toggleVisibility("B.B.B.")}>
+            <button
+              className="mr-4 p-2"
+              onClick={() => toggleVisibility("B.B.B.")}
+            >
               <img
                 className="max-h-24 w-full object-contain border-2 border-black rounded-lg"
                 src={breadImage}
@@ -82,7 +85,10 @@ export default function Buttons() {
                 height={48}
               />
             </button>
-            <button className="mr-4 p-2" onClick={() => toggleVisibility("Undead pursuit")}>
+            <button
+              className="mr-4 p-2"
+              onClick={() => toggleVisibility("Undead pursuit")}
+            >
               <img
                 className="max-h-24 w-full object-contain"
                 src="https://www.seaisland.com/content/uploads/2022/01/placeholder-image.png"
@@ -112,7 +118,9 @@ export default function Buttons() {
                 </p>
               )}
               {visibleText === "Brickception" && (
-                <p className="text-center fade-in text-2xl">Spinny brick game</p>
+                <p className="text-center fade-in text-2xl">
+                  Spinny brick game
+                </p>
               )}
               {visibleText === "Undead pursuit" && (
                 <p className="text-center fade-in text-2xl">Zombie.</p>
@@ -137,30 +145,36 @@ export default function Buttons() {
           >
             {!voteSuccess ? (
               <>
-              <p className="text-center font-bold text-3xl">Are you sure you want to vote for {visibleText}?</p>
-              <div className="flex justify-center mt-4">
-                <button
-                  className="text-lg font-semibold text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded-md mr-4"
-                  onClick={handleVoteClick}
-                >
-                  Confirm Vote
-                </button>
-                <button
-                  className="text-lg font-semibold text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md"
-                  onClick={closeModal}
-                >
-                  Cancel
-                </button>
-              </div>
-            </>
-            
+                <p className="text-center font-bold text-3xl">
+                  Are you sure you want to vote for {visibleText}?
+                </p>
+                <div className="flex justify-center mt-4">
+                  <button
+                    className="text-lg font-semibold text-white bg-green-500 hover:bg-green-600 px-4 py-2 rounded-md mr-4"
+                    onClick={handleVoteClick}
+                  >
+                    Confirm Vote
+                  </button>
+                  <button
+                    className="text-lg font-semibold text-white bg-red-500 hover:bg-red-600 px-4 py-2 rounded-md"
+                    onClick={closeModal}
+                  >
+                    Cancel
+                  </button>
+                </div>
+              </>
             ) : (
               <div className="text-center">
                 <span className="text-black text-5xl mb-4 inline-block">
                   &#10003;
                 </span>{" "}
                 <h2 className=" font-bold text-3xl">Vote Successful!</h2>
-                <button className="bg-black text-white px-3 py-1 rounded-md" onClick={closeModal}>Close</button>
+                <button
+                  className="bg-black text-white px-3 py-1 rounded-md"
+                  onClick={closeModal}
+                >
+                  Close
+                </button>
               </div>
             )}
           </Modal>
